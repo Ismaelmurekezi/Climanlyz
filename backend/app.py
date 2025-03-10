@@ -6,7 +6,8 @@ load_dotenv(find_dotenv())
 import os
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "Mongo-DB"
+
+app.config["MONGO_URI"] = ""
 mongo = PyMongo(app)
 
 @app.route("/")
