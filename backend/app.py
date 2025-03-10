@@ -6,8 +6,7 @@ load_dotenv(find_dotenv())
 import os
 
 app = Flask(__name__)
-# app.config["MONGO_URI"] = "mongodb://localhost:27017/Climanlyz"
-app.config["MONGO_URI"] = "mongodb+srv://ishmure:ismael123@cluster0.yror584.mongodb.net/Climanlyz?retryWrites=true&w=majority"
+app.config["MONGO_URI"] = "Mongo-DB"
 mongo = PyMongo(app)
 
 @app.route("/")
