@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import WeatherDataTable from "../components/table";
+
 
 function Home() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -80,15 +82,16 @@ function Home() {
           </div>
         </section>
 
-        {/* Final Output Section */}
+    
         <section className="px-28" id="output">
           <h2 className="text-2xl font-bold text-cyan-400 mb-6">
             FINAL OUTPUT
           </h2>
-          <p className="max-w-2xl">
+          <p className="max-w-2xl pb-7">
             Embrace the future of big data with Climate Data Analyzer and start
             optimizing your practices through data-driven insights today.
           </p>
+        <WeatherDataTable/>
         </section>
       </main>
     </div>

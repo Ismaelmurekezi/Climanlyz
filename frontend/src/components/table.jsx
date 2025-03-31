@@ -36,9 +36,9 @@ function WeatherDataTable({ data }) {
             <th className="border border-gray-200 p-4 text-left text-cyan-400 font-medium">
               Average temperature (°C)
             </th>
-            <th className="border border-gray-200 p-4 text-left text-cyan-400 font-medium">
+            {/* <th className="border border-gray-200 p-4 text-left text-cyan-400 font-medium">
               Max temperature (°C)
-            </th>
+            </th> */}
             <th className="border border-gray-200 p-4 text-left text-cyan-400 font-medium">
               Total rainfall (mm)
             </th>
@@ -53,9 +53,9 @@ function WeatherDataTable({ data }) {
               <td className="border border-gray-200 p-4 text-white">
                 {row.avgTemp}
               </td>
-              <td className="border border-gray-200 p-4 text-white">
+              {/* <td className="border border-gray-200 p-4 text-white">
                 {row.maxTemp}
-              </td>
+              </td> */}
               <td className="border border-gray-200 p-4 text-white">
                 {row.rainfall}
               </td>

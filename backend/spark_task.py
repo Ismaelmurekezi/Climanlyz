@@ -7,23 +7,22 @@ import pandas as pd
 def analyze_data(file_path):
     """Process CSV data using Apache Spark Worker Nodes and return aggregated results."""
     
-    # Initialize Spark Session
-    spark = SparkSession.builder.appName("ClimateWorker").getOrCreate()
 
-    # Define schema for data consistency
+    spark = SparkSession.builder.appName("ClimateAnalysis").master("spark://192.168.1.76:7077").config("spark.executor.memory", "4g").config("spark.cores.max", "4").getOrCreate()
+ 
+
     schema = StructType([
         StructField("City", StringType(), True),
         StructField("Temperature (°C)", DoubleType(), True),
         StructField("Rainfall (mm)", DoubleType(), True),
         StructField("Region", StringType(), True)
     ])
+  
 
     df = spark.read.csv(file_path, header=True, schema=schema)
     
-    # Clean data: trim whitespace from Region column
     df = df.withColumn("Region", trim(col("Region")))
 
-    # Aggregate: Average temperature and total rainfall per region
     region_summary = df.groupBy("Region").agg(
         avg("`Temperature (°C)`").alias("AvgTemperature"),
         sum("`Rainfall (mm)`").alias("TotalRainfall")
@@ -32,13 +31,13 @@ def analyze_data(file_path):
     # Convert results to a JSON-friendly Python dictionary
     result = region_summary.toPandas().to_dict(orient="records")
     
-    # Ensure all values are native Python types (for JSON serialization)
+    # Ensure all values are native Python types
     for record in result:
         for key, value in record.items():
             if hasattr(value, 'tolist'): 
                 record[key] = value.item()
     
-    # Stop Spark session
+
     spark.stop()
 
     return result
